@@ -161,7 +161,6 @@ textarea:focus {
 }
 
 .chat-button div {
-  display: inline-block;
   padding-left: 1rem;
 }
 
@@ -232,21 +231,78 @@ textarea:focus {
   }
 }
 
-/* Sign up wraper */
-.signin-wraper {
+
+/* Modals */
+.modal-wrapper{
   position: fixed;
   top: 0;
   left: 0;
-
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
 
-  visibility: hidden;
+  background-color: #00000030;
 
-  background-color: #00000020;
+  backdrop-filter: blur(2px);
+
   display: grid;
-  place-items: start right;
-  backdrop-filter: blur(10px);
+  
+  place-items: center;
+  z-index: 2;
+}
 
-  z-index: 12;
+.modal {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 2rem 2rem;
+
+  position: relative;
+}
+
+.modal__close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background-color: #009688;
+  color: white;
+  border: none;
+  border-end-start-radius: 30px;
+  border-end-end-radius: 30px;
+  padding: 0.1rem 1rem;
+}
+
+.modal__close-btn:hover {
+  text-decoration: underline
+}
+
+.profile-form {
+  padding: 1.7rem 0;
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.3rem;
+}
+
+.signin-button {
+  background-color: #009688;
+  color: white;
+  padding: 12px 20px;
+  border: 1px solid white;
+  border-radius: 21px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.signin-button:hover {
+  background-color: white;
+  color: #009688;
+  border: 1px solid #009688;
+
+}
+
+.profile-form input {
+  border: 1px solid #ccc;
+  border-radius: 21px;
+
+  margin: 0.5rem 1rem;
+  padding: 0.5rem;
+  padding-left: 2rem;
 }

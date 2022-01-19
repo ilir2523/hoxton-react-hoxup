@@ -1,23 +1,19 @@
-import { useNavigate } from "react-router-dom"
-import SignUpWraper from "../components/SignUpWraper"
-
-function LogIn({ users, save, setModal, modal }) {
-    const navigate = useNavigate()
-
+function StartChatWrapper({ setModal, users }) {
     function handleClick() {
-        navigate('/logged-in')
+        console.log('Conversation createt')
     }
 
     return (
-        <div className="main-wrapper login">
-            <section className="login-section">
-                <h2>Choose your user!</h2>
+        <div className="modal-wrapper" onClick={() => setModal('')} >
+            <div className="modal">
+            <button className="modal__close-btn"  onClick={() => setModal('')}>X </button>
+                <h2 className="title">Pick a user to talk to</h2>
                 <ul>
                     {users.map(user =>
                         <li key={user.id}>
                             <button className="user-selection" onClick={() => {
                                 handleClick()
-                                save('loggedIn', user)
+                                // save('loggedIn', user)
                             }}>
                                 <img
                                     className="avatar"
@@ -30,16 +26,10 @@ function LogIn({ users, save, setModal, modal }) {
                             </button>
                         </li>
                     )}
-                    <li>
-                        <button className="chat-button" onClick={() => setModal('sign-up')} >
-                            <div><h3>+ Add a new user</h3></div>
-                        </button>
-                    </li>
-                    {modal === 'sign-up' ? <SignUpWraper setModal={setModal} /> : <></> }
                 </ul>
-            </section>
+            </div>
         </div>
     )
 }
 
-export default LogIn
+export default StartChatWrapper
