@@ -1,20 +1,59 @@
-import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import MainChat from "../components/Chat"
 import ConversationsList from "../components/ConversationsList"
 import Header from "../components/Header"
 import StartChatWrapper from "../components/StartChatWrapper"
 
 
-function LoggedIn({ load, users, setModal, modal }) {
-    const [conversation, setConversation] = useState([])
+function LoggedIn({ save, load, users, setModal, modal }) {
+// currentConversation => {
+//   "userId": 1,
+//   "participantId": 4,
+//   "id": 1,
+//   "messages": [
+//     {
+//       "userId": 1,
+//       "messageText": "Hello",
+//       "conversationId": 1,
+//       "id": 1
+//     }
+//   ]
+// }
+    const [currentConversation, setCurrentConversation] = useState(null) 
+    const [conversations, setConversations] = useState([])
     const params = useParams()
-
+    const navigate = useNavigate()
     const loggedInUser = load('loggedIn')
+
+    useEffect(() => {
+        if (params.conversationId) {
+            fetch(
+                `http://localhost:4000/conversations/${params.conversationId}?_embed=messages`
+            )
+                .then(resp => resp.json())
+                .then(conversation => console.log(conversation))
+        }
+    }, [params.conversationId])
+
+    useEffect(() => {
+        if (loggedInUser === null) navigate('/')
+    }, [])
+
+    useEffect(() => {
+        if (load('loggedIn') === null) return
+        if (!loggedInUser) return;
+        fetch(`http://localhost:4000/conversations?userId=${loggedInUser.id}`)
+            .then(resp => resp.json())
+            .then(conversations => setConversations(conversations))
+    }, [])
+
+    if (loggedInUser === null) return <h1>Not signed in...</h1>
+
     return (
         <div className="main-wrapper">
             <aside>
-                <Header loggedInUser={loggedInUser} />
+                <Header loggedInUser={loggedInUser} save={save} load={load} />
 
                 <form className="aside__search-container">
                     <input
@@ -32,9 +71,19 @@ function LoggedIn({ load, users, setModal, modal }) {
                             <div><h3>+ Start a new Chat</h3></div>
                         </button>
                     </li>
-                    {users.filter(user => user.id < 3).map(user =>
-                        <ConversationsList user={user} setConversation={setConversation} />
-                    )}
+                    {conversations.map(conversation => {
+                        const talkingToId =
+                            loggedInUser.id === conversation.userId
+                                ? conversation.participantId
+                                : conversation.userId
+
+                        const talkingToUser = users.find(user => user.id === talkingToId)
+
+                        if (!talkingToUser) return null
+                        return (
+                            <ConversationsList navigate={navigate} conversation={conversation} key={talkingToUser.id} talkingToUser={talkingToUser} />
+                        )
+                    })}
                 </ul>
             </aside>
             {modal === 'start-chat' ? <StartChatWrapper users={users} setModal={setModal} /> : null}

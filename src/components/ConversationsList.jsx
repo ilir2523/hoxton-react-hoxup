@@ -1,22 +1,21 @@
-function ConversationsList({user, setConversation}) {
+function ConversationsList({talkingToUser, conversation, navigate }) {
     return (
-        <>
-            <li key={user.id}>
-                <button className="chat-button" onClick={() => setConversation(user.id)}>
+            <li>
+                <button className="chat-button" onClick={() => navigate(`/logged-in/${conversation.id}`)}>
                     <img
                         className="avatar"
                         height="50"
                         width="50"
                         alt=""
-                        src={`https://avatars.dicebear.com/api/avataaars/${user.firstName}${user.lastName}.svg`}
+                        src={`https://avatars.dicebear.com/api/avataaars/${talkingToUser.firstName}${talkingToUser.lastName}.svg`}
                     />
                     <div>
-                        <h3>{user.firstName} {user.lastName}</h3> {/* user.name */}
+                        <h3>{talkingToUser.firstName} {talkingToUser.lastName}</h3> {/* user.name */}
                         <p>Last message</p> {/* user.lastMessage */}
                     </div>
                 </button>
             </li>
-        </>
+
     )
 }
 

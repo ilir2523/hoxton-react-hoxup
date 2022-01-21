@@ -1,7 +1,17 @@
 export default function MainChat() {
+    
     return (
         <main className="conversation">
-            <header className="panel"></header>
+            <header className="panel">
+            <img
+                className="avatar"
+                width="50"
+                height="50"
+                src={`https://avatars.dicebear.com/api/avataaars/benibuuu.svg`}
+                alt=""
+            />
+            <h3>{`bla bla`}</h3>
+            </header>
             {/* <!-- The Messages List will go here. Check main-messages-list.html--> */}
 
             <ul className="conversation__messages">

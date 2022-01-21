@@ -1,4 +1,13 @@
-export default function Header({ loggedInUser }) {
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+
+export default function Header({save, load, loggedInUser }) {
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        if (load('loggedIn') === null) navigate('/')
+      }, [])
+
     return (
         <header className="panel">
             <img
@@ -9,6 +18,10 @@ export default function Header({ loggedInUser }) {
                 alt=""
             />
             <h3>{`${loggedInUser.firstName} ${loggedInUser.lastName}`}</h3>
+            <button onClick={() => {
+                save('loggedIn', null) 
+                navigate('/')
+        }}>Log Out</button>
         </header>
     )
 }

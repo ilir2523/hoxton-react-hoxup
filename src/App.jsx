@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route index element={<Navigate to={'/login'} />} />
         <Route path='/login' element={<LogIn users={users} save={save} setModal={setModal} modal={modal} />} />
-        <Route path='/logged-in' element={<LoggedIn load={load} users={users} setModal={setModal} modal={modal} />} />
+        <Route path='/logged-in' element={<LoggedIn save={save} load={load} users={users} setModal={setModal} modal={modal} />} />
         <Route path='/logged-in/:conversationId' element={<LoggedIn load={load} users={users} setModal={setModal} modal={modal} />} />
       </Routes>
     </>
