@@ -1,40 +1,17 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import MainChat from "../components/Chat"
+import MainChat from "../components/MainChat"
 import ConversationsList from "../components/ConversationsList"
 import Header from "../components/Header"
 import StartChatWrapper from "../components/StartChatWrapper"
 
 
 function LoggedIn({ save, load, users, setModal, modal }) {
-// currentConversation => {
-//   "userId": 1,
-//   "participantId": 4,
-//   "id": 1,
-//   "messages": [
-//     {
-//       "userId": 1,
-//       "messageText": "Hello",
-//       "conversationId": 1,
-//       "id": 1
-//     }
-//   ]
-// }
-    const [currentConversation, setCurrentConversation] = useState(null) 
+
     const [conversations, setConversations] = useState([])
     const params = useParams()
     const navigate = useNavigate()
     const loggedInUser = load('loggedIn')
-
-    useEffect(() => {
-        if (params.conversationId) {
-            fetch(
-                `http://localhost:4000/conversations/${params.conversationId}?_embed=messages`
-            )
-                .then(resp => resp.json())
-                .then(conversation => console.log(conversation))
-        }
-    }, [params.conversationId])
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/')
@@ -91,7 +68,7 @@ function LoggedIn({ save, load, users, setModal, modal }) {
             {/* <!-- Main Chat Section --> */}
 
             {/* <!-- Chat header --> */}
-            {params.conversationId ? <MainChat /> : null}
+            {params.conversationId ? <MainChat loggedInUser={loggedInUser} /> : null}
 
         </div>
     )

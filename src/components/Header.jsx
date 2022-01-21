@@ -1,12 +1,7 @@
-import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function Header({save, load, loggedInUser }) {
+export default function Header({save, loggedInUser }) {
     let navigate = useNavigate()
-
-    useEffect(() => {
-        if (load('loggedIn') === null) navigate('/')
-      }, [])
 
     return (
         <header className="panel">

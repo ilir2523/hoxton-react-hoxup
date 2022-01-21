@@ -1,7 +1,8 @@
 function ConversationsList({talkingToUser, conversation, navigate }) {
     return (
             <li>
-                <button className="chat-button" onClick={() => navigate(`/logged-in/${conversation.id}`)}>
+                <button className="chat-button"
+                 onClick={() => {navigate(`/logged-in/${conversation.id}`) }}>
                     <img
                         className="avatar"
                         height="50"

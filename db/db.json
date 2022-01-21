@@ -41,6 +41,42 @@
       "messageText": "Hola",
       "conversationId": 2,
       "id": 1
+    },
+    {
+      "userId": 1,
+      "messageText": "hey",
+      "conversationId": 2,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "messageText": "hey",
+      "conversationId": 1,
+      "id": 3
+    },
+    {
+      "userId": 4,
+      "messageText": "hey Ed how are you?",
+      "conversationId": 1,
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "messageText": "I'm good how are you?",
+      "conversationId": 1,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "messageText": "Where have you been ?",
+      "conversationId": 1,
+      "id": 6
+    },
+    {
+      "userId": 4,
+      "messageText": "I'm good thanks, just my hoxup was broken and only now I can write back to you",
+      "conversationId": 1,
+      "id": 7
     }
   ],
   "conversations": [
