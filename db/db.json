@@ -77,6 +77,36 @@
       "messageText": "I'm good thanks, just my hoxup was broken and only now I can write back to you",
       "conversationId": 1,
       "id": 7
+    },
+    {
+      "userId": 1,
+      "messageText": "aa ok",
+      "conversationId": 1,
+      "id": 8
+    },
+    {
+      "userId": 4,
+      "messageText": "ok",
+      "conversationId": 1,
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "messageText": "hey there how are you",
+      "conversationId": 1,
+      "id": 10
+    },
+    {
+      "userId": 4,
+      "messageText": "Im good",
+      "conversationId": 1,
+      "id": 11
+    },
+    {
+      "userId": 4,
+      "messageText": "hello geri",
+      "conversationId": 3,
+      "id": 12
     }
   ],
   "conversations": [
@@ -89,6 +119,11 @@
       "userId": 1,
       "participantId": 3,
       "id": 2
+    },
+    {
+      "userId": 4,
+      "participantId": 2,
+      "id": 3
     }
   ]
 }

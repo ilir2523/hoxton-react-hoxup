@@ -35,7 +35,7 @@ function LogIn({ users, save, setModal, modal }) {
                             <div><h3>+ Add a new user</h3></div>
                         </button>
                     </li>
-                    {modal === 'sign-up' ? <SignUpWraper setModal={setModal} /> : <></> }
+                    {modal === 'sign-up' ? <SignUpWraper setModal={setModal} /> : null }
                 </ul>
             </section>
         </div>

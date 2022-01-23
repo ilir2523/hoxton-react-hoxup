@@ -13,6 +13,17 @@ function LoggedIn({ save, load, users, setModal, modal }) {
     const navigate = useNavigate()
     const loggedInUser = load('loggedIn')
 
+    const usersIHaveNotTalkedToYet = users.filter(user => {
+        if (loggedInUser && user.id === loggedInUser.id) return false
+
+        for (const conversation of conversations) {
+            if (conversation.userId === user.id) return false
+            if (conversation.participantId === user.id) return false
+          }
+
+          return true
+    })
+
     useEffect(() => {
         if (loggedInUser === null) navigate('/')
     }, [])
@@ -24,6 +35,24 @@ function LoggedIn({ save, load, users, setModal, modal }) {
             .then(resp => resp.json())
             .then(conversations => setConversations(conversations))
     }, [])
+
+    function createConversation (participantId) {
+        fetch('http://localhost:4000/conversations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId: loggedInUser.id,
+            participantId: participantId
+          })
+        })
+          .then(resp => resp.json())
+          .then(newConversation => {
+            setConversations([...conversations, newConversation])
+            setModal('')
+          })
+      }
 
     if (loggedInUser === null) return <h1>Not signed in...</h1>
 
@@ -42,7 +71,6 @@ function LoggedIn({ save, load, users, setModal, modal }) {
 
                 {/* Side Chat */}
                 <ul>
-                    {/* <!-- This first item should always be present --> */}
                     <li>
                         <button className="chat-button" onClick={() => setModal('start-chat')} >
                             <div><h3>+ Start a new Chat</h3></div>
@@ -63,13 +91,13 @@ function LoggedIn({ save, load, users, setModal, modal }) {
                     })}
                 </ul>
             </aside>
-            {modal === 'start-chat' ? <StartChatWrapper users={users} setModal={setModal} /> : null}
-
-            {/* <!-- Main Chat Section --> */}
-
-            {/* <!-- Chat header --> */}
+            {modal === 'start-chat' ? <StartChatWrapper 
+             users={users} 
+             setModal={setModal}
+             usersIHaveNotTalkedToYet={usersIHaveNotTalkedToYet} 
+             createConversation={createConversation} 
+             /> : null}
             {params.conversationId ? <MainChat loggedInUser={loggedInUser} /> : null}
-
         </div>
     )
 }
