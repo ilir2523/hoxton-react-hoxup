@@ -21,14 +21,32 @@ function App() {
     return JSON.parse(localStorage.getItem(key))
   }
 
-  console.log(users)
+  function createUser(firstName, lastName, phoneNumber ) {
+    fetch('http://localhost:4000/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        avatar: `https://avatars.dicebear.com/api/avataaars/${firstName}${lastName}.svg`
+      })
+    })
+      .then(resp => resp.json())
+      .then(newUser => {
+        setUsers([...users, newUser])
+        setModal('')
+      })
+  }
 
 
   return (
     <>
       <Routes>
         <Route index element={<Navigate to={'/login'} />} />
-        <Route path='/login' element={<LogIn users={users} save={save} setModal={setModal} modal={modal} />} />
+        <Route path='/login' element={<LogIn users={users} save={save} setModal={setModal} modal={modal} createUser={createUser} />} />
         <Route path='/logged-in' element={<LoggedIn save={save} load={load} users={users} setModal={setModal} modal={modal} />} />
         <Route path='/logged-in/:conversationId' element={<LoggedIn save={save} load={load} users={users} setModal={setModal} modal={modal} />} />
       </Routes>

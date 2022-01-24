@@ -1,10 +1,15 @@
-function SignUpWraper({ setModal }) {
+function SignUpWraper({ setModal, createUser }) {
     return (
         <div className="modal-wrapper" >
             <div className="modal">
                 <button className="modal__close-btn" onClick={() => setModal('')}>x Close</button>
                 <h2 className="title">Sign Up</h2>
-                <form className="profile-form">
+                
+                <form className="profile-form" onSubmit={(e) => {
+                    e.preventDefault()
+                    createUser(e.target.firstName.value, e.target.lastName.value, e.target.phone.value)
+                }}>
+                
                     <label htmlFor="user-firstName">First name</label>
                     <input type="text" id="user-firstName" name="firstName"></input>
                     <label htmlFor="user-lastName">Last name</label>

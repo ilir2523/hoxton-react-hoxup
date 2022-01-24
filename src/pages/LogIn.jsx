@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import SignUpWraper from "../components/SignUpWraper"
 
-function LogIn({ users, save, setModal, modal }) {
+function LogIn({ users, save, setModal, modal, createUser }) {
     const navigate = useNavigate()
 
     function handleClick() {
@@ -35,7 +35,7 @@ function LogIn({ users, save, setModal, modal }) {
                             <div><h3>+ Add a new user</h3></div>
                         </button>
                     </li>
-                    {modal === 'sign-up' ? <SignUpWraper setModal={setModal} /> : null }
+                    {modal === 'sign-up' ? <SignUpWraper setModal={setModal} createUser={createUser} /> : null }
                 </ul>
             </section>
         </div>

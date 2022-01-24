@@ -27,6 +27,13 @@
       "phoneNumber": "+696969696969",
       "avatar": "https://avatars.dicebear.com/api/avataaars/NicolasMarcora.svg",
       "id": 4
+    },
+    {
+      "firstName": "Ilir",
+      "lastName": "Rukaj",
+      "phoneNumber": "+355684808625",
+      "avatar": "https://avatars.dicebear.com/api/avataaars/IlirRukaj.svg",
+      "id": 5
     }
   ],
   "messages": [
@@ -107,6 +114,18 @@
       "messageText": "hello geri",
       "conversationId": 3,
       "id": 12
+    },
+    {
+      "userId": 5,
+      "messageText": "What is up ",
+      "conversationId": 4,
+      "id": 13
+    },
+    {
+      "userId": 5,
+      "messageText": "@Ed",
+      "conversationId": 4,
+      "id": 14
     }
   ],
   "conversations": [
@@ -124,6 +143,11 @@
       "userId": 4,
       "participantId": 2,
       "id": 3
+    },
+    {
+      "userId": 5,
+      "participantId": 1,
+      "id": 4
     }
   ]
 }
